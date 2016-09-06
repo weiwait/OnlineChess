@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineChess</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <canvas id="chess"></canvas>
+    <script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
+    <script>
+        function Weiwait() {}
+        $(function () {
+            Weiwait.chess.windowResize();
+            $(window).resize(function () {
+                Weiwait.chess.windowResize();
+            });
+        });
+
+        (function ($) {
+            var chess = $('#chess');
+        })(jQuery);
+
+        Weiwait.chess = {};
+        Weiwait.chess.windowResize = function () {
+            var chess = $('#chess');
+            var height = chess.css('height');
+            chess.css('width', height);
+            var context = chess[0].getContext('2d');
+            context.strokeStyle = '#bfbfbf';
+            height = parseInt(height);
+            var cell = height / 18;
+            context.moveTo(15, 15);
+            context.lineTo(15, 100);
+            context.stroke();
+        };
+
+
+
+
+
+//        var chessBoard = function() {
+//            for (var i = 0; i < 15; i++) {
+//                context.moveTo(15 + i * 30, 15);
+//                context.lineTo(15 + i * 30, 435);
+//                context.stroke();
+//                context.moveTo(15, 15 + i * 30);
+//                context.lineTo(435, 15 + i * 30);
+//                context.stroke();
+//            }
+//        };
+    </script>
+</body>
+</html>

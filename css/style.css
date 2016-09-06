@@ -1,0 +1,16 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+html, body {
+	width: 100%;
+	height: 100%;
+}
+#chess {
+	height: 80%;
+	display: block;
+	margin: 0 auto;
+	box-shadow: -2px -2px 2px #efefef, 5px 5px 5px #b9b9b9;
+	position: relative;
+	top: 10%;
+}
