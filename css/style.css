@@ -6,11 +6,39 @@ html, body {
 	width: 100%;
 	height: 100%;
 }
-#chess {
-	height: 80%;
-	display: block;
-	margin: 0 auto;
-	box-shadow: -2px -2px 2px #efefef, 5px 5px 5px #b9b9b9;
-	position: relative;
-	top: 10%;
+.chess-wrap {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
 }
+.chess-wrap table {
+    position: absolute;
+	cellspacing: 0;
+    cellpadding: 0;
+}
+.broad {
+    /*border: 1px solid #ccc;*/
+    width: 480px;
+    height: 480px;
+    top: 0;
+    left: 0;
+}
+.chess {
+    border: 1px solid red;
+    width: 448px;
+    height: 448px;
+    top: 15px;
+    left: 15px;
+}
+.chess-wrap td {
+	width: 30px;
+	height: 30px;
+}
+.broad td {
+    /*border: 1px solid #ccc;*/
+}
+.chess td {
+	border: 1px solid red;
+}
+
