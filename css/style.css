@@ -8,8 +8,8 @@ html, body {
 }
 .chess-wrap {
     position: relative;
-    width: 602px;
-    height: 602px;
+    /*width: 602px;*/
+    height: 80%;
     top: 50%;
     left: 50%;
     margin: -321px 0 0 -321px;
@@ -19,15 +19,15 @@ html, body {
 }
 .broad {
     /*border: 1px solid #ccc;*/
-    width: 602px;
-    height: 602px;
+    /*width: 602px;*/
+    /*height: 602px;*/
     top: 0;
     left: 0;
 }
 .chess {
     border: 1px solid #eee;
-    width: 562px;
-    height: 562px;
+    /*width: 562px;*/
+    /*height: 562px;*/
     top: 20px;
     left: 20px;
 }

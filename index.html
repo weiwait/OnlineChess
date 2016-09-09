@@ -507,6 +507,8 @@
         var opponent = [];
         (function initialize()
         {
+            resetView();
+
             //标记棋盘 初始化所有格仔为true，可下棋状态 以坐标i为行j为列交点就是每个格仔;
             //同时声明赢法数组
             for (var i = 1; i < 16; i++) {
@@ -622,6 +624,16 @@
         function warning()
         {
             alert('can not put down here');
+        }
+
+        function resetView()
+        {
+            var height = parseInt($('.chess-wrap').css('height'));
+            var tdSize = parseInt(height / 15);
+            $('.chess-wrap td').css({'width': tdSize, 'height': tdSize});
+            var chessWrapSize = $('.broad').width();
+            $('.chess-wrap, .broad').css({'width': chessWrapSize, 'height': chessWrapSize});
+            console.log(chessWrapSize);
         }
     })(jQuery);
 </script>
