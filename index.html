@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OnlineChess</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -499,32 +499,90 @@
 <script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
 <script>
     (function ($) {
+        var user = 'me';
         var chessStatus = [];
-        function initialize()
+        var wins = [];
+        var winCount = 1;
+        var myWin = [];
+        var opponent = [];
+        (function initialize()
         {
-            //标记棋盘 初始化所有格为空 以坐标i => x, j => y;
+            //标记棋盘 初始化所有格仔为true，可下棋状态 以坐标i为行j为列交点就是每个格仔;
+            //同时声明赢法数组
             for (var i = 1; i < 16; i++) {
                 chessStatus[i] = [];
+                wins[i] = [];
                 for (var j = 1;  j < 16; j++) {
                     chessStatus[i][j] = true;
+                    wins[i][j] = [];
                 }
             }
-        }
+
+            //每行的赢法
+            for (var l = 1; l < 16; l++) {
+                for (var m = 1; m < 12; m++) {
+                    for (var k = 0; k < 5; k++) {
+                        wins[l][m + k][winCount] = true;
+                    }
+                    winCount++;
+                }
+            }
+            //每列的赢法
+            for (var o = 1; o < 16; o++) {
+                for (var p = 1; p < 12; p++) {
+                    for (var r = 0; r < 5; r++) {
+                        wins[p + r][o][winCount] = true;
+                    }
+                    winCount++;
+                }
+            }
+
+            //左斜线的赢法
+            for (var s = 1; s < 12; s++) {
+                for (var t = 1; t < 12; t++) {
+                    for (var u = 0; u < 5; u++) {
+                        wins[s + u][t + u][winCount] = true;
+                    }
+                    winCount++;
+                }
+            }
+
+            //右斜线的赢法
+            for (var v = 1; v < 12; v++) {
+                for (var w = 15; w > 4; w--) {
+                    for (var x = 0; x < 5; x++) {
+                        wins[v + x][w - x][winCount] = true;
+                    }
+                    winCount++;
+                }
+            }
+
+            //初始化每种赢法的可能性为0
+            for (var n = 1; n <= winCount; n++) {
+                myWin[n] = 0;
+                opponent[n] = 0;
+            }
+        })();
 
         var chess = 'red';
-        var already = [];
+//        var already = [];
         $('.broad td').click(function (e) {
             var x = e.target.cellIndex + 1;
             var y = e.target.parentElement.rowIndex + 1;
-            var tdIndex = x.toString() + y.toString();
-            for (var i = 0; i < already.length; i++) {
-                if (already[i] == tdIndex) {
-                    warning();
-                    return;
-                }
+//            var tdIndex = x.toString() + y.toString();
+//            for (var i = 0; i < already.length; i++) {
+//                if (already[i] == tdIndex) {
+//                    warning();
+//                    return;
+//                }
+//            }
+//            already.push(tdIndex);
+            if (chessStatus[y][x]) {
+                chessStatus[y][x] = false;
+                putChess(x, y);
+            } else {
+                warning();
             }
-            already.push(tdIndex);
-            putChess(x, y);
         });
 
         function putChess(x, y)
@@ -533,6 +591,26 @@
             //noinspection JSValidateTypes
             var curr = $(".broad tbody tr:nth-child("+ y +")").children("td:nth-child("+ x +")");
             curr.css('background', chess);
+
+            //在当前棋子所属赢法中为真的赢法加1个可能性；五个可能性为赢；
+            for (var i = 1; i <= winCount; i++) {
+                if (wins[y][x][i]) {
+                    if (user == 'me') {
+                        myWin[i]++;
+                        opponent[i] = 6;
+                        if (myWin[i] == 5) {
+                            alert('me win');
+                        }
+                    } else {
+                        opponent[i]++;
+                        myWin[i] = 6;
+                        if (opponent[i] == 5) {
+                            alert('opponent win');
+                        }
+                    }
+                }
+            }
+            user = user == 'me' ? 'opponent' : 'me';
         }
 
         function chessFactory()
