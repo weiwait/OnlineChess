@@ -617,7 +617,7 @@
 
         function chessFactory()
         {
-            chess = chess == 'red'? 'blue': 'red';
+            chess = chess == 'red' ? 'blue' : 'red';
             return chess;
         }
 
@@ -628,13 +628,47 @@
 
         function resetView()
         {
-            var height = parseInt($('.chess-wrap').css('height'));
-            var tdSize = parseInt(height / 15);
+            console.log('hello');
+            var chess = $('.chess');
+            var chessWrap = $('.chess-wrap');
+            chessWrap.css('width', '80%');
+            chessWrap.css('height', '80%');
+            var widthSize = parseInt(chessWrap.css('width'));
+            var heightSize = parseInt(chessWrap.css('height'));
+//            if (window.orientation == 90 || window.orientation == -90) {
+//                chessWrap.css('width', '80%');
+//                size = parseInt(chessWrap.css('width'));
+//            } else {
+//                chessWrap.css('height', '80%');
+//                size = parseInt(chessWrap.css('height'));
+//            }
+//            var height = parseInt(chessWrap.css('height'));
+            var size = widthSize > heightSize ? heightSize : widthSize;
+            var tdSize = parseInt(size / 15);
+                tdSize = tdSize % 2 == 0 ? tdSize : tdSize - 1;
             $('.chess-wrap td').css({'width': tdSize, 'height': tdSize});
-            var chessWrapSize = $('.broad').width();
-            $('.chess-wrap, .broad').css({'width': chessWrapSize, 'height': chessWrapSize});
-            console.log(chessWrapSize);
+            var chessWrapSize = tdSize * 15 + 30;
+            $('.chess-wrap, .broad').css({
+                'width': chessWrapSize,
+                'height': chessWrapSize
+            });
+            chessWrap.css({
+                'margin-top': -chessWrapSize / 2,
+                'margin-left': -chessWrapSize / 2
+            });
+            var chessSize = tdSize * 14 + 28;
+            chess.css({
+                'width': chessSize,
+                'height': chessSize,
+                'top': tdSize / 2 + 1,
+                'left': tdSize / 2 + 1
+            });
+
         }
+
+        $(window).resize(function () {
+            resetView();
+        });
     })(jQuery);
 </script>
 </body>
