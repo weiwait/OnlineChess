@@ -499,12 +499,14 @@
 <script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
 <script>
     (function ($) {
-        var user = 'me';
+        var user = 'blue';
+        var chess = 'red';
+        var winCount = 1;
         var chessStatus = [];
         var wins = [];
-        var winCount = 1;
-        var myWin = [];
-        var opponent = [];
+        var blue = [];
+        var red = [];
+        var over = false;
         (function initialize()
         {
             resetView();
@@ -561,34 +563,27 @@
 
             //初始化每种赢法的可能性为0
             for (var n = 1; n <= winCount; n++) {
-                myWin[n] = 0;
-                opponent[n] = 0;
+                blue[n] = 0;
+                red[n] = 0;
             }
         })();
 
-        var chess = 'red';
-//        var already = [];
         $('.broad td').click(function (e) {
             var x = e.target.cellIndex + 1;
             var y = e.target.parentElement.rowIndex + 1;
-//            var tdIndex = x.toString() + y.toString();
-//            for (var i = 0; i < already.length; i++) {
-//                if (already[i] == tdIndex) {
-//                    warning();
-//                    return;
-//                }
-//            }
-//            already.push(tdIndex);
-            if (chessStatus[y][x]) {
-                chessStatus[y][x] = false;
-                putChess(x, y);
-            } else {
-                warning();
-            }
+            putChess(x, y);
         });
 
         function putChess(x, y)
         {
+            if (over) {
+                return;
+            }
+            if (chessStatus[y][x]) {
+                chessStatus[y][x] = false;
+            } else {
+                warning();
+            }
             var chess = chessFactory();
             //noinspection JSValidateTypes
             var curr = $(".broad tbody tr:nth-child("+ y +")").children("td:nth-child("+ x +")");
@@ -597,22 +592,24 @@
             //在当前棋子所属赢法中为真的赢法加1个可能性；五个可能性为赢；
             for (var i = 1; i <= winCount; i++) {
                 if (wins[y][x][i]) {
-                    if (user == 'me') {
-                        myWin[i]++;
-                        opponent[i] = 6;
-                        if (myWin[i] == 5) {
-                            alert('me win');
+                    if (user == 'blue') {
+                        blue[i]++;
+                        red[i] = 6;
+                        if (blue[i] == 5) {
+                            over = true;
+                            alert('blue win');
                         }
                     } else {
-                        opponent[i]++;
-                        myWin[i] = 6;
-                        if (opponent[i] == 5) {
-                            alert('opponent win');
+                        red[i]++;
+                        blue[i] = 6;
+                        if (red[i] == 5) {
+                            over = true;
+                            alert('red win');
                         }
                     }
                 }
             }
-            user = user == 'me' ? 'opponent' : 'me';
+            user = user == 'blue' ? 'red' : 'blue';
         }
 
         function chessFactory()
@@ -628,21 +625,12 @@
 
         function resetView()
         {
-            console.log('hello');
             var chess = $('.chess');
             var chessWrap = $('.chess-wrap');
             chessWrap.css('width', '80%');
             chessWrap.css('height', '80%');
             var widthSize = parseInt(chessWrap.css('width'));
             var heightSize = parseInt(chessWrap.css('height'));
-//            if (window.orientation == 90 || window.orientation == -90) {
-//                chessWrap.css('width', '80%');
-//                size = parseInt(chessWrap.css('width'));
-//            } else {
-//                chessWrap.css('height', '80%');
-//                size = parseInt(chessWrap.css('height'));
-//            }
-//            var height = parseInt(chessWrap.css('height'));
             var size = widthSize > heightSize ? heightSize : widthSize;
             var tdSize = parseInt(size / 15);
                 tdSize = tdSize % 2 == 0 ? tdSize : tdSize - 1;
