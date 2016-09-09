@@ -9,22 +9,7 @@
 <body>
 <div class="chess-wrap">
     <table cellpadding="0" cellspacing="0" class="chess">
-        <tr>
-            <td"></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+        <tbody>
         <tr>
             <td></td>
             <td></td>
@@ -233,8 +218,26 @@
             <td></td>
             <td></td>
         </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
     </table>
     <table cellpadding="0" cellspacing="0" class="broad">
+        <tbody>
         <tr>
             <td></td>
             <td></td>
@@ -490,27 +493,57 @@
             <td></td>
             <td></td>
         </tr>
+        </tbody>
     </table>
 </div>
 <script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
 <script>
     (function ($) {
+        var chessStatus = [];
+        function initialize()
+        {
+            //标记棋盘 初始化所有格为空 以坐标i => x, j => y;
+            for (var i = 1; i < 16; i++) {
+                chessStatus[i] = [];
+                for (var j = 1;  j < 16; j++) {
+                    chessStatus[i][j] = true;
+                }
+            }
+        }
+
         var chess = 'red';
+        var already = [];
         $('.broad td').click(function (e) {
-           var x = e.target.cellIndex + 1;
-           var y = e.target.parentElement.rowIndex + 1;
+            var x = e.target.cellIndex + 1;
+            var y = e.target.parentElement.rowIndex + 1;
+            var tdIndex = x.toString() + y.toString();
+            for (var i = 0; i < already.length; i++) {
+                if (already[i] == tdIndex) {
+                    warning();
+                    return;
+                }
+            }
+            already.push(tdIndex);
             putChess(x, y);
         });
 
-        function putChess(x, y) {
+        function putChess(x, y)
+        {
             var chess = chessFactory();
+            //noinspection JSValidateTypes
             var curr = $(".broad tbody tr:nth-child("+ y +")").children("td:nth-child("+ x +")");
             curr.css('background', chess);
         }
 
-        function chessFactory() {
+        function chessFactory()
+        {
             chess = chess == 'red'? 'blue': 'red';
             return chess;
+        }
+
+        function warning()
+        {
+            alert('can not put down here');
         }
     })(jQuery);
 </script>

@@ -8,37 +8,40 @@ html, body {
 }
 .chess-wrap {
     position: relative;
-    width: 500px;
-    height: 500px;
-    margin: 0 auto;
+    width: 602px;
+    height: 602px;
+    top: 50%;
+    left: 50%;
+    margin: -321px 0 0 -321px;
 }
 .chess-wrap table {
     position: absolute;
-	cellspacing: 0;
-    cellpadding: 0;
 }
 .broad {
     /*border: 1px solid #ccc;*/
-    width: 480px;
-    height: 480px;
+    width: 602px;
+    height: 602px;
     top: 0;
     left: 0;
 }
 .chess {
-    border: 1px solid red;
-    width: 448px;
-    height: 448px;
-    top: 15px;
-    left: 15px;
+    border: 1px solid #eee;
+    width: 562px;
+    height: 562px;
+    top: 20px;
+    left: 20px;
 }
 .chess-wrap td {
-	width: 30px;
-	height: 30px;
+	width: 38px;
+	height: 38px;
 }
 .broad td {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
     /*border: 1px solid #ccc;*/
 }
 .chess td {
-	border: 1px solid red;
+	border: 1px solid #ccc;
 }
 
