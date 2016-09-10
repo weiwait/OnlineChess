@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace weiwait\OnlineChess\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use weiwait\OnlineChess\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller

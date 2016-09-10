@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OnlineChess</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="{{url('/css/style.css')}}">
 </head>
 <body>
 <div class="chess-wrap">
@@ -496,7 +496,7 @@
         </tbody>
     </table>
 </div>
-<script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="{{url('/js/jquery-3.1.0.min.js')}}"></script>
 <script>
     (function ($) {
         var user = 'blue';
@@ -581,8 +581,6 @@
             putChess(x, y);
         });
 
-        function remote
-
         function putChess(x, y)
         {
             if (over) {
@@ -636,8 +634,8 @@
         {
             var chess = $('.chess');
             var chessWrap = $('.chess-wrap');
-            chessWrap.css('width', '80%');
-            chessWrap.css('height', '80%');
+            chessWrap.css('width', '94%');
+            chessWrap.css('height', '94%');
             var widthSize = parseInt(chessWrap.css('width'));
             var heightSize = parseInt(chessWrap.css('height'));
             var size = widthSize > heightSize ? heightSize : widthSize;

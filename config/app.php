@@ -25,7 +25,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'environment'),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -172,11 +172,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        weiwait\OnlineChess\Providers\AppServiceProvider::class,
+        weiwait\OnlineChess\Providers\AuthServiceProvider::class,
+        // weiwait\OnlineChess\Providers\BroadcastServiceProvider::class,
+        weiwait\OnlineChess\Providers\EventServiceProvider::class,
+        weiwait\OnlineChess\Providers\RouteServiceProvider::class,
 
     ],
 

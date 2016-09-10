@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace weiwait\OnlineChess\Http\Controllers\Auth;
 
-use App\User;
+use weiwait\OnlineChess\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use weiwait\OnlineChess\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
