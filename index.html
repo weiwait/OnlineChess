@@ -507,6 +507,8 @@
         var blue = [];
         var red = [];
         var over = false;
+        var me = true;
+        var opponent = false;
         (function initialize()
         {
             resetView();
@@ -569,10 +571,17 @@
         })();
 
         $('.broad td').click(function (e) {
+            if (!me && opponent) {
+                return;
+            }
+            me = false;
+            opponent = true;
             var x = e.target.cellIndex + 1;
             var y = e.target.parentElement.rowIndex + 1;
             putChess(x, y);
         });
+
+        function remote
 
         function putChess(x, y)
         {
