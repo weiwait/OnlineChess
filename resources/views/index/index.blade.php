@@ -581,6 +581,16 @@
             putChess(x, y);
         });
 
+        function remotePutChess(x, y)
+        {
+            if (me && !opponent) {
+                return;
+            }
+            me = true;
+            opponent = false;
+            putChess(x, y);
+        }
+
         function putChess(x, y)
         {
             if (over) {
